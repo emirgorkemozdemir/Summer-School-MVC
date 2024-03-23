@@ -1,0 +1,17 @@
+﻿@using Yaz_Okulu_MVC_2.Models
+@model DersTablosu
+@{
+    ViewBag.Title = "EditLesson";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("EditLesson", "Lesson", FormMethod.Post))
+{
+    @Html.HiddenFor(m=>m.DersID)
+    @Html.TextBoxFor(m => m.DersAd, new { @class = "form-control", placeholder = "Ders adını giriniz" })
+    @Html.TextBoxFor(m => m.MaxKont, new { @class = "form-control", placeholder = "Maximum kontenjanı giriniz" })
+    @Html.TextBoxFor(m => m.MinKont, new { @class = "form-control", placeholder = "Minimum kontenjanı giriniz" })
+    @Html.TextBoxFor(m => m.OgrSayısı, new { @class = "form-control", placeholder = "Öğrenci sayısını giriniz" })
+    <input type="submit" value="Düzenle" class="btn btn-danger" />
+}
+

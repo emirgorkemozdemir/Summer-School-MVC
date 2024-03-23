@@ -1,0 +1,15 @@
+﻿@using Yaz_Okulu_MVC_2.Models
+@model DersTablosu
+@{
+    ViewBag.Title = "AddLesson";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("AddLesson", "Lesson", FormMethod.Post))
+{
+    @Html.TextBoxFor(m => m.DersAd, new { @class = "form-control" , placeholder="Ders adını giriniz" })
+    @Html.TextBoxFor(m => m.MaxKont, new { @class = "form-control", placeholder ="Maximum kontenjanı giriniz" })
+    @Html.TextBoxFor(m => m.MinKont, new { @class = "form-control", placeholder = "Minimum kontenjanı giriniz" })
+    @Html.TextBoxFor(m => m.OgrSayısı, new { @class = "form-control", placeholder = "Öğrenci sayısını giriniz" })
+    <input type="submit" value="Ekle" class="btn btn-danger" />
+}

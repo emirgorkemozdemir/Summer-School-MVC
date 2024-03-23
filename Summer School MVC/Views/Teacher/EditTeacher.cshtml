@@ -1,0 +1,16 @@
+﻿@using Yaz_Okulu_MVC_2.Models
+@model ÖğretmenTablosu
+@{
+    ViewBag.Title = "EditTeacher";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("EditTeacher", "Teacher", FormMethod.Post))
+{
+    @Html.HiddenFor(m=>m.OgrtID)
+    @Html.TextBoxFor(m => m.OgrtAdSoyad, new { @class = "form-control", placeholder = "Öğretmen adı-soyadı giriniz" })
+    @Html.DropDownListFor(m => m.OgrtDersID, (List<SelectListItem>)ViewBag.list, "Ders seçiniz", new { @class = "form-control" })
+    <input type="submit" value="Düzenle" class="btn btn-danger" />
+}
+
+

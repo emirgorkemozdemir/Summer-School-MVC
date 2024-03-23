@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7e363b9578db4f0bb567ab1dfb386e51" Name="Diagram1">
+        <EntityTypeShape EntityType="YazOkuluVeritabanıModel.BasvuruTablosu" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="YazOkuluVeritabanıModel.DersTablosu" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="YazOkuluVeritabanıModel.ÖğrenciTablosu" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="YazOkuluVeritabanıModel.ÖğretmenTablosu" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="YazOkuluVeritabanıModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="YazOkuluVeritabanıModel.FK_BasvuruTablosu_DersTablosu" ManuallyRouted="false" />
+        <AssociationConnector Association="YazOkuluVeritabanıModel.FK_BasvuruTablosu_ÖğrenciTablosu" ManuallyRouted="false" />
+        <AssociationConnector Association="YazOkuluVeritabanıModel.FK_ÖğretmenTablosu_DersTablosu" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

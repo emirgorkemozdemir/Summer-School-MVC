@@ -1,0 +1,40 @@
+﻿@using Yaz_Okulu_MVC_2.Models
+@model List<ÖğrenciTablosu>
+@{
+    ViewBag.Title = "ListStudents";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Öğrenci ID</th>
+            <th>Öğrenci Adı</th>
+            <th>Öğrenci Soyadı</th>
+            <th>Öğrenci Mail</th>
+            <th>Öğrenci Şifresi</th>
+            <th>Bakiye</th>
+            <th>Öğrenci Okul No</th>
+            <th>Öğrenci Sil</th>
+            <th>Öğrenci Düzenle</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var student in Model)
+        {
+        <tr>
+            <td>@student.OgrID</td>
+            <td>@student.OgrAd</td>
+            <td>@student.OgrSoyad</td>
+            <td>@student.OgrMail</td>
+            <td>@student.OgrSifre</td>
+            <td>@student.Bakiye</td>
+            <td>@student.OgrOkulNo</td>
+            <td><a class="btn btn-danger" href="/Student/DeleteStudent/@student.OgrID">Sil</a></td>
+            <td><a class="btn btn-danger" href="/Student/EditStudent/@student.OgrID">Düzenle</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a href="/Student/AddStudent" class="btn btn-danger">Öğrenci Ekle</a>

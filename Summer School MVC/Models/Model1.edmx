@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="YazOkuluVeritabanıModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BasvuruTablosu">
+          <Key>
+            <PropertyRef Name="BasvuruID" />
+          </Key>
+          <Property Name="BasvuruID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BasOgrID" Type="int" />
+          <Property Name="BasDersId" Type="int" />
+          <Property Name="BasOgrtID" Type="int" />
+        </EntityType>
+        <EntityType Name="DersTablosu">
+          <Key>
+            <PropertyRef Name="DersID" />
+          </Key>
+          <Property Name="DersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DersAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaxKont" Type="int" />
+          <Property Name="MinKont" Type="int" />
+          <Property Name="OgrSayısı" Type="int" />
+        </EntityType>
+        <EntityType Name="ÖğrenciTablosu">
+          <Key>
+            <PropertyRef Name="OgrID" />
+          </Key>
+          <Property Name="OgrID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OgrAd" Type="nvarchar(max)" />
+          <Property Name="OgrSoyad" Type="nvarchar(max)" />
+          <Property Name="OgrMail" Type="nvarchar(max)" />
+          <Property Name="OgrSifre" Type="nvarchar(max)" />
+          <Property Name="Bakiye" Type="int" />
+          <Property Name="OgrOkulNo" Type="nvarchar" MaxLength="90" />
+        </EntityType>
+        <EntityType Name="ÖğretmenTablosu">
+          <Key>
+            <PropertyRef Name="OgrtID" />
+          </Key>
+          <Property Name="OgrtID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OgrtAdSoyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="OgrtDersID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_BasvuruTablosu_DersTablosu">
+          <End Role="DersTablosu" Type="Self.DersTablosu" Multiplicity="0..1" />
+          <End Role="BasvuruTablosu" Type="Self.BasvuruTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DersTablosu">
+              <PropertyRef Name="DersID" />
+            </Principal>
+            <Dependent Role="BasvuruTablosu">
+              <PropertyRef Name="BasDersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BasvuruTablosu_ÖğrenciTablosu">
+          <End Role="ÖğrenciTablosu" Type="Self.ÖğrenciTablosu" Multiplicity="0..1" />
+          <End Role="BasvuruTablosu" Type="Self.BasvuruTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ÖğrenciTablosu">
+              <PropertyRef Name="OgrID" />
+            </Principal>
+            <Dependent Role="BasvuruTablosu">
+              <PropertyRef Name="BasOgrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ÖğretmenTablosu_DersTablosu">
+          <End Role="DersTablosu" Type="Self.DersTablosu" Multiplicity="0..1" />
+          <End Role="ÖğretmenTablosu" Type="Self.ÖğretmenTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DersTablosu">
+              <PropertyRef Name="DersID" />
+            </Principal>
+            <Dependent Role="ÖğretmenTablosu">
+              <PropertyRef Name="OgrtDersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YazOkuluVeritabanıModelStoreContainer">
+          <EntitySet Name="BasvuruTablosu" EntityType="Self.BasvuruTablosu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DersTablosu" EntityType="Self.DersTablosu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ÖğrenciTablosu" EntityType="Self.ÖğrenciTablosu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ÖğretmenTablosu" EntityType="Self.ÖğretmenTablosu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BasvuruTablosu_DersTablosu" Association="Self.FK_BasvuruTablosu_DersTablosu">
+            <End Role="DersTablosu" EntitySet="DersTablosu" />
+            <End Role="BasvuruTablosu" EntitySet="BasvuruTablosu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BasvuruTablosu_ÖğrenciTablosu" Association="Self.FK_BasvuruTablosu_ÖğrenciTablosu">
+            <End Role="ÖğrenciTablosu" EntitySet="ÖğrenciTablosu" />
+            <End Role="BasvuruTablosu" EntitySet="BasvuruTablosu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ÖğretmenTablosu_DersTablosu" Association="Self.FK_ÖğretmenTablosu_DersTablosu">
+            <End Role="DersTablosu" EntitySet="DersTablosu" />
+            <End Role="ÖğretmenTablosu" EntitySet="ÖğretmenTablosu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YazOkuluVeritabanıModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BasvuruTablosu">
+          <Key>
+            <PropertyRef Name="BasvuruID" />
+          </Key>
+          <Property Name="BasvuruID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BasOgrID" Type="Int32" />
+          <Property Name="BasDersId" Type="Int32" />
+          <Property Name="BasOgrtID" Type="Int32" />
+          <NavigationProperty Name="DersTablosu" Relationship="Self.FK_BasvuruTablosu_DersTablosu" FromRole="BasvuruTablosu" ToRole="DersTablosu" />
+          <NavigationProperty Name="ÖğrenciTablosu" Relationship="Self.FK_BasvuruTablosu_ÖğrenciTablosu" FromRole="BasvuruTablosu" ToRole="ÖğrenciTablosu" />
+        </EntityType>
+        <EntityType Name="DersTablosu">
+          <Key>
+            <PropertyRef Name="DersID" />
+          </Key>
+          <Property Name="DersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DersAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaxKont" Type="Int32" />
+          <Property Name="MinKont" Type="Int32" />
+          <Property Name="OgrSayısı" Type="Int32" />
+          <NavigationProperty Name="BasvuruTablosu" Relationship="Self.FK_BasvuruTablosu_DersTablosu" FromRole="DersTablosu" ToRole="BasvuruTablosu" />
+          <NavigationProperty Name="ÖğretmenTablosu" Relationship="Self.FK_ÖğretmenTablosu_DersTablosu" FromRole="DersTablosu" ToRole="ÖğretmenTablosu" />
+        </EntityType>
+        <EntityType Name="ÖğrenciTablosu">
+          <Key>
+            <PropertyRef Name="OgrID" />
+          </Key>
+          <Property Name="OgrID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OgrAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OgrSoyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OgrMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OgrSifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bakiye" Type="Int32" />
+          <Property Name="OgrOkulNo" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BasvuruTablosu" Relationship="Self.FK_BasvuruTablosu_ÖğrenciTablosu" FromRole="ÖğrenciTablosu" ToRole="BasvuruTablosu" />
+        </EntityType>
+        <EntityType Name="ÖğretmenTablosu">
+          <Key>
+            <PropertyRef Name="OgrtID" />
+          </Key>
+          <Property Name="OgrtID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OgrtAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OgrtDersID" Type="Int32" />
+          <NavigationProperty Name="DersTablosu" Relationship="Self.FK_ÖğretmenTablosu_DersTablosu" FromRole="ÖğretmenTablosu" ToRole="DersTablosu" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_BasvuruTablosu_DersTablosu">
+          <End Role="DersTablosu" Type="Self.DersTablosu" Multiplicity="0..1" />
+          <End Role="BasvuruTablosu" Type="Self.BasvuruTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DersTablosu">
+              <PropertyRef Name="DersID" />
+            </Principal>
+            <Dependent Role="BasvuruTablosu">
+              <PropertyRef Name="BasDersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BasvuruTablosu_ÖğrenciTablosu">
+          <End Role="ÖğrenciTablosu" Type="Self.ÖğrenciTablosu" Multiplicity="0..1" />
+          <End Role="BasvuruTablosu" Type="Self.BasvuruTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ÖğrenciTablosu">
+              <PropertyRef Name="OgrID" />
+            </Principal>
+            <Dependent Role="BasvuruTablosu">
+              <PropertyRef Name="BasOgrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ÖğretmenTablosu_DersTablosu">
+          <End Role="DersTablosu" Type="Self.DersTablosu" Multiplicity="0..1" />
+          <End Role="ÖğretmenTablosu" Type="Self.ÖğretmenTablosu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DersTablosu">
+              <PropertyRef Name="DersID" />
+            </Principal>
+            <Dependent Role="ÖğretmenTablosu">
+              <PropertyRef Name="OgrtDersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YazOkuluVeritabanıEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BasvuruTablosu" EntityType="Self.BasvuruTablosu" />
+          <EntitySet Name="DersTablosu" EntityType="Self.DersTablosu" />
+          <EntitySet Name="ÖğrenciTablosu" EntityType="Self.ÖğrenciTablosu" />
+          <EntitySet Name="ÖğretmenTablosu" EntityType="Self.ÖğretmenTablosu" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_BasvuruTablosu_DersTablosu" Association="Self.FK_BasvuruTablosu_DersTablosu">
+            <End Role="DersTablosu" EntitySet="DersTablosu" />
+            <End Role="BasvuruTablosu" EntitySet="BasvuruTablosu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BasvuruTablosu_ÖğrenciTablosu" Association="Self.FK_BasvuruTablosu_ÖğrenciTablosu">
+            <End Role="ÖğrenciTablosu" EntitySet="ÖğrenciTablosu" />
+            <End Role="BasvuruTablosu" EntitySet="BasvuruTablosu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ÖğretmenTablosu_DersTablosu" Association="Self.FK_ÖğretmenTablosu_DersTablosu">
+            <End Role="DersTablosu" EntitySet="DersTablosu" />
+            <End Role="ÖğretmenTablosu" EntitySet="ÖğretmenTablosu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YazOkuluVeritabanıModelStoreContainer" CdmEntityContainer="YazOkuluVeritabanıEntities">
+          <EntitySetMapping Name="BasvuruTablosu">
+            <EntityTypeMapping TypeName="YazOkuluVeritabanıModel.BasvuruTablosu">
+              <MappingFragment StoreEntitySet="BasvuruTablosu">
+                <ScalarProperty Name="BasvuruID" ColumnName="BasvuruID" />
+                <ScalarProperty Name="BasOgrID" ColumnName="BasOgrID" />
+                <ScalarProperty Name="BasDersId" ColumnName="BasDersId" />
+                <ScalarProperty Name="BasOgrtID" ColumnName="BasOgrtID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DersTablosu">
+            <EntityTypeMapping TypeName="YazOkuluVeritabanıModel.DersTablosu">
+              <MappingFragment StoreEntitySet="DersTablosu">
+                <ScalarProperty Name="DersID" ColumnName="DersID" />
+                <ScalarProperty Name="DersAd" ColumnName="DersAd" />
+                <ScalarProperty Name="MaxKont" ColumnName="MaxKont" />
+                <ScalarProperty Name="MinKont" ColumnName="MinKont" />
+                <ScalarProperty Name="OgrSayısı" ColumnName="OgrSayısı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ÖğrenciTablosu">
+            <EntityTypeMapping TypeName="YazOkuluVeritabanıModel.ÖğrenciTablosu">
+              <MappingFragment StoreEntitySet="ÖğrenciTablosu">
+                <ScalarProperty Name="OgrID" ColumnName="OgrID" />
+                <ScalarProperty Name="OgrAd" ColumnName="OgrAd" />
+                <ScalarProperty Name="OgrSoyad" ColumnName="OgrSoyad" />
+                <ScalarProperty Name="OgrMail" ColumnName="OgrMail" />
+                <ScalarProperty Name="OgrSifre" ColumnName="OgrSifre" />
+                <ScalarProperty Name="Bakiye" ColumnName="Bakiye" />
+                <ScalarProperty Name="OgrOkulNo" ColumnName="OgrOkulNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ÖğretmenTablosu">
+            <EntityTypeMapping TypeName="YazOkuluVeritabanıModel.ÖğretmenTablosu">
+              <MappingFragment StoreEntitySet="ÖğretmenTablosu">
+                <ScalarProperty Name="OgrtID" ColumnName="OgrtID" />
+                <ScalarProperty Name="OgrtAdSoyad" ColumnName="OgrtAdSoyad" />
+                <ScalarProperty Name="OgrtDersID" ColumnName="OgrtDersID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="YazOkuluVeritabanıModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,18 @@
+﻿@using Yaz_Okulu_MVC_2.Models
+@model ÖğrenciTablosu
+@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("AddStudent", "Student", FormMethod.Post))
+{
+    @Html.TextBoxFor(m => m.OgrAd, new { @class = "form-control", placeholder = "Öğrenci adını giriniz" })
+    @Html.TextBoxFor(m => m.OgrSoyad, new { @class = "form-control", placeholder = "Öğrenci soyadını giriniz" })
+    @Html.TextBoxFor(m => m.OgrMail, new { @class = "form-control", placeholder = "Öğrenci mail adresini giriniz" })
+    @Html.PasswordFor(m => m.OgrSifre, new { @class = "form-control", placeholder = "Öğrenci şifresini giriniz" })
+    @Html.TextBoxFor(m => m.Bakiye, new { @class = "form-control", placeholder = "Bakiye giriniz" })
+    @Html.TextBoxFor(m => m.OgrOkulNo, new { @class = "form-control", placeholder = "Öğrenci okul numarasını giriniz" })
+    <input type="submit" class="btn btn-danger" value="Ekle"/>
+}
+
